@@ -7,7 +7,7 @@
 
 This file is the consolidated reference for Colleris. It covers the current architecture, features, database schema, API, frontend, design system, seed data, and a reconstructed changelog. There is no Git history in this workspace, so dates come from file timestamps and the earlier `FINAL_REPORT.md`. Treat the dates as approximate.
 
-The older `FINAL_REPORT.md` covers the phase 2 V2 iteration through 2026-09-22. The code has since moved through the group-mode and completion-vote work dated 2026-10-05/06, the query performance pass on 2026-11-02, and the assignment/directory/group-project edit fixes later that day. Where this document and `FINAL_REPORT.md` disagree, the code and this document describe the current state. The app-level READMEs and `AGENTS.md` were aligned with this document on 2026-10-20.
+The older `FINAL_REPORT.md` (moved to `C:\OpenCode\CollerisNotes\agent-notes\` on 2026-11-21, along with `AGENTS.md` and `DEV_NOTES.md`) covers the phase 2 V2 iteration through 2026-09-22. The code has since moved through the group-mode and completion-vote work dated 2026-10-05/06, the query performance pass on 2026-11-02, and the assignment/directory/group-project edit fixes later that day. Where this document and `FINAL_REPORT.md` disagree, the code and this document describe the current state. The app-level READMEs and `AGENTS.md` were aligned with this document on 2026-10-20.
 
 ## Contents
 
@@ -211,9 +211,9 @@ The `pb_accounts` localStorage entry contains accounts and tokens authorised on 
 
 ```text
 colleris/
-  AGENTS.md                 Agent and environment notes
-  FINAL_REPORT.md           Phase 2 V2 report, 2026-09-21/22
   .htaccess                 Root forwarder to backend/public
+  (agent docs, QA scripts/screenshots and tooling moved to
+   C:\OpenCode\CollerisNotes on 2026-11-21 — see that folder's README)
   assets/
     design-tokens.json      W3C DTCG token source
     design-tokens.css       Generated token stylesheet
@@ -1354,7 +1354,7 @@ These are current-code observations, not a promise that every item is a defect. 
 
 ### Remaining documentation drift
 
-`frontend/README.md`, `backend/README.md`, and `AGENTS.md` were aligned with the current code on 2026-10-20. Remaining drift is confined to the historical report:
+`frontend/README.md`, `backend/README.md`, and `AGENTS.md` (the last now in `C:\OpenCode\CollerisNotes\agent-notes\` with `FINAL_REPORT.md`, `DEV_NOTES.md`, the QA scripts, screenshots and MCP tooling — see that folder's README) were aligned with the current code on 2026-10-20. Remaining drift is confined to the historical report:
 
 - `FINAL_REPORT.md` is a phase 2 V2 snapshot. It does not cover the October group-mode and vote changes.
 - `FINAL_REPORT.md` describes duplicate connections as 409. The current API returns 200.
