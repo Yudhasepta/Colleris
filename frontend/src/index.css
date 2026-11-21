@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap');
+@import './tokens/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Colleris — 3-layer token build
+   Primitives → semantic → component live in tokens/tokens.css.
+   This file is the composition layer: base reset, utilities,
+   and refined UI/UX for the productivity flat-design revision.
+   ============================================================ */
+
+/* --- Base --- */
+html {
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--primitive-fontSize-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* Filled accent surfaces — gradient-aware for cotton-candy */
+.bg-accent-gradient {
+  background: var(--accent-bg);
+}
+.bg-accent-soft-gradient {
+  background: var(--accent-soft-bg);
+}
+.text-accent-gradient {
+  background: var(--accent-bg);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- Scrollbar (thin, token-driven) --- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 20px;
+  border: 3px solid var(--surface);
+  background-clip: padding-box;
+  transition: background-color var(--primitive-duration-fast) ease;
+}
+::-webkit-scrollbar-thumb:hover { background-color: var(--accent); background-clip: padding-box; }
+
+/* --- Animations --- */
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-status-spin { animation: spin 2.2s linear infinite; }
+
+/* Subtle dotted texture for editorial headers only */
+.texture-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--text-faint) 22%, transparent) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Atmospheric header glow — driven entirely by the theme-scoped token.
+   `--hero-glow` is `none` for amber, cotton-candy, and every preset that
+   does not define one, so this layer is a visual no-op outside Nebula. */
+.page-atmosphere {
+  position: relative;
+}
+.page-atmosphere::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  height: 220px;
+  background: var(--hero-glow);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================================
+   UI/UX Refinements — Flat Design productivity revision
+   - 150-200ms transitions (primitive durations)
+   - Clean hover via color/opacity, no heavy shadows
+   - 44px touch target awareness for slider thumb (24px hit)
+   - Focus ring via --focus-ring (accent 30%)
+   ============================================================ */
+
+/* Interactive defaults: fast, consistent */
+button, a, [role="button"], input, select, textarea {
+  transition:
+    background-color var(--primitive-duration-fast) ease,
+    border-color var(--primitive-duration-fast) ease,
+    color var(--primitive-duration-fast) ease,
+    opacity var(--primitive-duration-fast) ease,
+    transform var(--primitive-duration-fast) ease,
+    box-shadow var(--primitive-duration-fast) ease;
+}
+
+/* Focus visible — unified (accessibility) */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Card refinement — flat, border-driven hover (no heavy shadow) */
+@layer components {
+  .card-refined {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: none;
+    transition:
+      border-color var(--primitive-duration-normal) ease,
+      transform var(--primitive-duration-fast) ease;
+  }
+  .card-refined:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-1px);
+  }
+}
+
+/* Range slider — token-driven, comfortable hit-area */
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px; /* 44px guidance: thumb 18px + 24px track hit */
+  background: transparent;
+  cursor: pointer;
+}
+.range-slider--compact { height: 20px; }
+.range-slider:focus-visible { outline: none; }
+.range-slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--focus-ring); }
+.range-slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--focus-ring); }
+.range-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--slider-fill, var(--accent)) var(--slider-progress, 0%), var(--slider-track, var(--surface-2)) var(--slider-progress, 0%));
+  border: 1px solid var(--border);
+}
+.range-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--slider-fill, var(--accent)) var(--slider-progress, 0%), var(--slider-track, var(--surface-2)) var(--slider-progress, 0%));
+  border: 1px solid var(--border);
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--slider-fill, var(--accent));
+  border: 2px solid var(--slider-thumb-border, var(--surface));
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 1px color-mix(in srgb, var(--slider-fill, var(--accent)) 20%, transparent);
+  margin-top: -7px;
+  transition: transform var(--primitive-duration-fast) ease, box-shadow var(--primitive-duration-fast) ease;
+}
+.range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--slider-fill, var(--accent));
+  border: 2px solid var(--slider-thumb-border, var(--surface));
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 1px color-mix(in srgb, var(--slider-fill, var(--accent)) 20%, transparent);
+  transition: transform var(--primitive-duration-fast) ease, box-shadow var(--primitive-duration-fast) ease;
+}
+.range-slider:hover::-webkit-slider-thumb { transform: scale(1.08); }
+.range-slider:active::-webkit-slider-thumb {
+  transform: scale(1.18);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 4px color-mix(in srgb, var(--slider-fill, var(--accent)) 22%, transparent);
+}
+.range-slider:hover::-moz-range-thumb { transform: scale(1.08); }
+.range-slider:active::-moz-range-thumb {
+  transform: scale(1.18);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 4px color-mix(in srgb, var(--slider-fill, var(--accent)) 22%, transparent);
+}
+.range-slider:disabled { cursor: default; }
+.range-slider:disabled::-webkit-slider-thumb { filter: grayscale(0.7); opacity: 0.7; }
+.range-slider:disabled::-moz-range-thumb { filter: grayscale(0.7); opacity: 0.7; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Collaborating-group badge — semantic info token mapped to preset cyan */
+:root {
+  --status-info: var(--cyan);
+  --on-status-info: var(--on-accent);
+}

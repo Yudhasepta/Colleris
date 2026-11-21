@@ -1,0 +1,13 @@
+# Dependencies (root playwright-mcp wrapper + any future root install)
+node_modules/
+
+# Agent / tooling state (local only)
+.opencode/
+
+# Runtime artifacts
+# SSE event queues are written per dev-server process pair (see AGENTS.md)
+backend/storage/app/sse/
+
+# Windows
+Thumbs.db
+*.bak

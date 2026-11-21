@@ -1,0 +1,1437 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "primitive": {
+    "color": {
+      "neutral": {
+        "onAccent": {
+          "$value": "#161207",
+          "$type": "color"
+        },
+        "onDanger": {
+          "$value": "#fff7f4",
+          "$type": "color"
+        },
+        "scrim": {
+          "$value": "rgba(6, 5, 4, 0.6)",
+          "$type": "color"
+        },
+        "bg-dark": {
+          "$value": "#0b0b0a",
+          "$type": "color"
+        },
+        "sidebar-dark": {
+          "$value": "#0f0f0d",
+          "$type": "color"
+        },
+        "surface-dark": {
+          "$value": "#131311",
+          "$type": "color"
+        },
+        "surface-2-dark": {
+          "$value": "#1a1a17",
+          "$type": "color"
+        },
+        "surface-hover-dark": {
+          "$value": "#22221d",
+          "$type": "color"
+        },
+        "border-dark": {
+          "$value": "#2b2a24",
+          "$type": "color"
+        },
+        "text-dark": {
+          "$value": "#f4f2ea",
+          "$type": "color"
+        },
+        "text-muted-dark": {
+          "$value": "#a8a49a",
+          "$type": "color"
+        },
+        "text-faint-dark": {
+          "$value": "#6f6b60",
+          "$type": "color"
+        },
+        "bg-light": {
+          "$value": "#f7f6f2",
+          "$type": "color"
+        },
+        "sidebar-light": {
+          "$value": "#faf9f6",
+          "$type": "color"
+        },
+        "surface-light": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "surface-2-light": {
+          "$value": "#f1efe9",
+          "$type": "color"
+        },
+        "surface-hover-light": {
+          "$value": "#e9e6dd",
+          "$type": "color"
+        },
+        "border-light": {
+          "$value": "#e0ddd2",
+          "$type": "color"
+        },
+        "text-light": {
+          "$value": "#16150f",
+          "$type": "color"
+        },
+        "text-muted-light": {
+          "$value": "#55524a",
+          "$type": "color"
+        },
+        "text-faint-light": {
+          "$value": "#9a968a",
+          "$type": "color"
+        }
+      },
+      "default": {
+        "onAccent": {
+          "$value": "#161207",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#edc025",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#f2d267",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#8a6a12",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#4fb8cc",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#7ccccb",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#2a788a",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#e08a9e",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#eaaabe",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#934f62",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#a58fd6",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#beaee4",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#6d55a8",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#5fbf97",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#84d3b3",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#357a5d",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e8933c",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0ad6b",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c5c1a",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d85a50",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e5867e",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#9a3a34",
+          "$type": "color"
+        }
+      },
+      "blue": {
+        "onAccent": {
+          "$value": "#0c1220",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#5b8def",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#87a9f2",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#3a5fb0",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#3fb9c9",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#6cd3de",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#2b7b88",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#dd7aa6",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#e89fc0",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#944d72",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#8f6fe0",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#a68de8",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#5b479c",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#3fae8a",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#6bc4a6",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#24725a",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e8963e",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0b16f",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c5c1a",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d95a64",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e5868f",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#963a44",
+          "$type": "color"
+        }
+      },
+      "cyan-preset": {
+        "onAccent": {
+          "$value": "#06272b",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#2fb2c2",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#63cbda",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#1e7886",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#55c7e8",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#7fd6ef",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#2c7d98",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#e08bb0",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#ecacc9",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#944d70",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#9f8cf0",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#b9abf6",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#6a55b8",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#55c99b",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#7dd8b4",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#2f8a66",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e8a03c",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0bb6e",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c651a",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d96a74",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e58e96",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#97404a",
+          "$type": "color"
+        }
+      },
+      "pink-preset": {
+        "onAccent": {
+          "$value": "#2a111f",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#e07aa6",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#eea3c0",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#a0527c",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#5fbcc8",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#8bcfd8",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#337d88",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#f28cb8",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#f6accc",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#a4557d",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#b48bf0",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#cbacf6",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#7c58b8",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#6bc9a3",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#94dcbf",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#3f8a6a",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e89a48",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0b777",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c6124",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d85a6e",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e58593",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#9a3a4e",
+          "$type": "color"
+        }
+      },
+      "lavender": {
+        "onAccent": {
+          "$value": "#17122b",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#9a8cf2",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#b7acf7",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#6a5ac0",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#69c0cf",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#93d5e1",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#3a7d8a",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#e28bb4",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#edabca",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#94507a",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#a78bfa",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#bda6fb",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#6d55b8",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#6ac6a4",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#94dbbf",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#3d8368",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e39a42",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#ebb873",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#965e1b",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#db6a7a",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e794a0",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#9a4250",
+          "$type": "color"
+        }
+      },
+      "mint-preset": {
+        "onAccent": {
+          "$value": "#07271b",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#3fae8a",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#6fc4a6",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#24725a",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#55c7bc",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#80d8d0",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#2f8780",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#e392ac",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#eeb4c5",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#965068",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#9f90e0",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#bab0ec",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#6858ac",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#55c99b",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#7dd8b4",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#2f8a66",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e0a03c",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#e9bc6d",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#976919",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d96a74",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e58e96",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#97404a",
+          "$type": "color"
+        }
+      },
+      "cotton-candy": {
+        "onAccent": {
+          "$value": "#0a141b",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#7ec8e3",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#a7dcee",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#4c89a8",
+          "$type": "color"
+        },
+        "accent-bg": {
+          "$value": "linear-gradient(135deg, #7ec8e3 0%, #f2a7c6 100%)",
+          "$type": "color"
+        },
+        "accent-soft-bg": {
+          "$value": "linear-gradient(135deg, #a7dcee 0%, #f6c4da 100%)",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#4fc3d6",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#7ed9e6",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#2c7f8f",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#f2a7c6",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#f6c4da",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#b06a8e",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#b59ce0",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#cebcec",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#7558ac",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#6cc9a4",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#96dcbf",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#3d8168",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e8a03c",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0bb6e",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c651a",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d96a74",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e58e96",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#97404a",
+          "$type": "color"
+        }
+      },
+      "nebula": {
+        "onAccent": {
+          "$value": "#171226",
+          "$type": "color"
+        },
+        "accent": {
+          "$value": "#9d7bff",
+          "$type": "color"
+        },
+        "accent-soft": {
+          "$value": "#b7a5ff",
+          "$type": "color"
+        },
+        "accent-dim": {
+          "$value": "#5a4a9e",
+          "$type": "color"
+        },
+        "cyan": {
+          "$value": "#5e9fe8",
+          "$type": "color"
+        },
+        "cyan-soft": {
+          "$value": "#8fc0f2",
+          "$type": "color"
+        },
+        "cyan-dim": {
+          "$value": "#3a6ba8",
+          "$type": "color"
+        },
+        "pink": {
+          "$value": "#c97fbe",
+          "$type": "color"
+        },
+        "pink-soft": {
+          "$value": "#e0a6d6",
+          "$type": "color"
+        },
+        "pink-dim": {
+          "$value": "#8a4d78",
+          "$type": "color"
+        },
+        "purple": {
+          "$value": "#a78bfa",
+          "$type": "color"
+        },
+        "purple-soft": {
+          "$value": "#c4b0fb",
+          "$type": "color"
+        },
+        "purple-dim": {
+          "$value": "#6d55b8",
+          "$type": "color"
+        },
+        "mint": {
+          "$value": "#55c9a0",
+          "$type": "color"
+        },
+        "mint-soft": {
+          "$value": "#82dcb8",
+          "$type": "color"
+        },
+        "mint-dim": {
+          "$value": "#2f8a66",
+          "$type": "color"
+        },
+        "warn": {
+          "$value": "#e8a23c",
+          "$type": "color"
+        },
+        "warn-soft": {
+          "$value": "#f0b96e",
+          "$type": "color"
+        },
+        "warn-dim": {
+          "$value": "#9c651a",
+          "$type": "color"
+        },
+        "danger": {
+          "$value": "#d95a72",
+          "$type": "color"
+        },
+        "danger-soft": {
+          "$value": "#e58a9c",
+          "$type": "color"
+        },
+        "danger-dim": {
+          "$value": "#963a4e",
+          "$type": "color"
+        },
+        "bg-dark": {
+          "$value": "#09080f",
+          "$type": "color"
+        },
+        "sidebar-dark": {
+          "$value": "#0c0a16",
+          "$type": "color"
+        },
+        "surface-dark": {
+          "$value": "rgba(19, 17, 30, 0.85)",
+          "$type": "color"
+        },
+        "surface-2-dark": {
+          "$value": "#1a1726",
+          "$type": "color"
+        },
+        "surface-hover-dark": {
+          "$value": "#231f33",
+          "$type": "color"
+        },
+        "border-dark": {
+          "$value": "rgba(167, 139, 250, 0.16)",
+          "$type": "color"
+        },
+        "text-dark": {
+          "$value": "#f2f0fa",
+          "$type": "color"
+        },
+        "text-muted-dark": {
+          "$value": "#a9a4c4",
+          "$type": "color"
+        },
+        "text-faint-dark": {
+          "$value": "#6e6a8c",
+          "$type": "color"
+        },
+        "bg-light": {
+          "$value": "#f6f5fb",
+          "$type": "color"
+        },
+        "sidebar-light": {
+          "$value": "#fbfafe",
+          "$type": "color"
+        },
+        "surface-light": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "surface-2-light": {
+          "$value": "#efeaf9",
+          "$type": "color"
+        },
+        "surface-hover-light": {
+          "$value": "#e5def6",
+          "$type": "color"
+        },
+        "border-light": {
+          "$value": "rgba(139, 92, 246, 0.2)",
+          "$type": "color"
+        },
+        "text-light": {
+          "$value": "#1b1830",
+          "$type": "color"
+        },
+        "text-muted-light": {
+          "$value": "#5a5670",
+          "$type": "color"
+        },
+        "text-faint-light": {
+          "$value": "#9a95b2",
+          "$type": "color"
+        },
+        "status-wait": {
+          "$value": "#8a86a8",
+          "$type": "color"
+        },
+        "hero-glow": {
+          "$value": "radial-gradient(60% 90% at 50% 0%, rgba(139, 92, 246, 0.12) 0%, rgba(99, 68, 180, 0.08) 45%, transparent 70%)",
+          "$type": "color"
+        },
+        "card-top-highlight": {
+          "$value": "inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+          "$type": "color"
+        }
+      }
+    },
+    "spacing": {
+      "0": {
+        "$value": "0",
+        "$type": "dimension"
+      },
+      "1": {
+        "$value": "0.25rem",
+        "$type": "dimension"
+      },
+      "2": {
+        "$value": "0.5rem",
+        "$type": "dimension"
+      },
+      "3": {
+        "$value": "0.75rem",
+        "$type": "dimension"
+      },
+      "4": {
+        "$value": "1rem",
+        "$type": "dimension"
+      },
+      "5": {
+        "$value": "1.25rem",
+        "$type": "dimension"
+      },
+      "6": {
+        "$value": "1.5rem",
+        "$type": "dimension"
+      },
+      "8": {
+        "$value": "2rem",
+        "$type": "dimension"
+      },
+      "10": {
+        "$value": "2.5rem",
+        "$type": "dimension"
+      },
+      "12": {
+        "$value": "3rem",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "4rem",
+        "$type": "dimension"
+      }
+    },
+    "fontSize": {
+      "xs": {
+        "$value": "0.75rem",
+        "$type": "dimension"
+      },
+      "sm": {
+        "$value": "0.875rem",
+        "$type": "dimension"
+      },
+      "base": {
+        "$value": "1rem",
+        "$type": "dimension"
+      },
+      "lg": {
+        "$value": "1.125rem",
+        "$type": "dimension"
+      },
+      "xl": {
+        "$value": "1.25rem",
+        "$type": "dimension"
+      },
+      "2xl": {
+        "$value": "1.5rem",
+        "$type": "dimension"
+      },
+      "3xl": {
+        "$value": "1.875rem",
+        "$type": "dimension"
+      },
+      "4xl": {
+        "$value": "2.25rem",
+        "$type": "dimension"
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "$value": "400",
+        "$type": "fontWeight"
+      },
+      "medium": {
+        "$value": "500",
+        "$type": "fontWeight"
+      },
+      "semibold": {
+        "$value": "600",
+        "$type": "fontWeight"
+      },
+      "bold": {
+        "$value": "700",
+        "$type": "fontWeight"
+      }
+    },
+    "radius": {
+      "sm": {
+        "$value": "6px",
+        "$type": "dimension"
+      },
+      "md": {
+        "$value": "10px",
+        "$type": "dimension"
+      },
+      "lg": {
+        "$value": "14px",
+        "$type": "dimension"
+      },
+      "full": {
+        "$value": "9999px",
+        "$type": "dimension"
+      }
+    },
+    "shadow": {
+      "sm": {
+        "$value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "$type": "shadow"
+      },
+      "default": {
+        "$value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+        "$type": "shadow"
+      },
+      "panel": {
+        "$value": "0 8px 24px rgba(0,0,0,.28)",
+        "$type": "shadow"
+      }
+    },
+    "duration": {
+      "fast": {
+        "$value": "150ms",
+        "$type": "duration"
+      },
+      "normal": {
+        "$value": "200ms",
+        "$type": "duration"
+      },
+      "slow": {
+        "$value": "300ms",
+        "$type": "duration"
+      }
+    },
+    "fontFamily": {
+      "display": {
+        "$value": "'Inter', sans-serif",
+        "$type": "fontFamily"
+      },
+      "body": {
+        "$value": "'Inter', sans-serif",
+        "$type": "fontFamily"
+      },
+      "mono": {
+        "$value": "'JetBrains Mono', monospace",
+        "$type": "fontFamily"
+      },
+      "display-cotton": {
+        "$value": "'Fredoka', 'Inter', sans-serif",
+        "$type": "fontFamily"
+      }
+    }
+  },
+  "semantic": {
+    "bg": {
+      "$value": "{primitive.color.neutral.bg-dark}",
+      "$type": "color"
+    },
+    "sidebar": {
+      "$value": "{primitive.color.neutral.sidebar-dark}",
+      "$type": "color"
+    },
+    "surface": {
+      "$value": "{primitive.color.neutral.surface-dark}",
+      "$type": "color"
+    },
+    "surface-2": {
+      "$value": "{primitive.color.neutral.surface-2-dark}",
+      "$type": "color"
+    },
+    "surface-hover": {
+      "$value": "{primitive.color.neutral.surface-hover-dark}",
+      "$type": "color"
+    },
+    "border": {
+      "$value": "{primitive.color.neutral.border-dark}",
+      "$type": "color"
+    },
+    "text": {
+      "$value": "{primitive.color.neutral.text-dark}",
+      "$type": "color"
+    },
+    "text-muted": {
+      "$value": "{primitive.color.neutral.text-muted-dark}",
+      "$type": "color"
+    },
+    "text-faint": {
+      "$value": "{primitive.color.neutral.text-faint-dark}",
+      "$type": "color"
+    },
+    "accent": {
+      "$value": "{primitive.color.default.accent}",
+      "$type": "color"
+    },
+    "accent-soft": {
+      "$value": "{primitive.color.default.accent-soft}",
+      "$type": "color"
+    },
+    "accent-dim": {
+      "$value": "{primitive.color.default.accent-dim}",
+      "$type": "color"
+    },
+    "on-accent": {
+      "$value": "{primitive.color.default.onAccent}",
+      "$type": "color"
+    },
+    "cyan": {
+      "$value": "{primitive.color.default.cyan}",
+      "$type": "color"
+    },
+    "cyan-soft": {
+      "$value": "{primitive.color.default.cyan-soft}",
+      "$type": "color"
+    },
+    "cyan-dim": {
+      "$value": "{primitive.color.default.cyan-dim}",
+      "$type": "color"
+    },
+    "pink": {
+      "$value": "{primitive.color.default.pink}",
+      "$type": "color"
+    },
+    "pink-soft": {
+      "$value": "{primitive.color.default.pink-soft}",
+      "$type": "color"
+    },
+    "pink-dim": {
+      "$value": "{primitive.color.default.pink-dim}",
+      "$type": "color"
+    },
+    "purple": {
+      "$value": "{primitive.color.default.purple}",
+      "$type": "color"
+    },
+    "purple-soft": {
+      "$value": "{primitive.color.default.purple-soft}",
+      "$type": "color"
+    },
+    "purple-dim": {
+      "$value": "{primitive.color.default.purple-dim}",
+      "$type": "color"
+    },
+    "mint": {
+      "$value": "{primitive.color.default.mint}",
+      "$type": "color"
+    },
+    "mint-soft": {
+      "$value": "{primitive.color.default.mint-soft}",
+      "$type": "color"
+    },
+    "mint-dim": {
+      "$value": "{primitive.color.default.mint-dim}",
+      "$type": "color"
+    },
+    "warn": {
+      "$value": "{primitive.color.default.warn}",
+      "$type": "color"
+    },
+    "warn-soft": {
+      "$value": "{primitive.color.default.warn-soft}",
+      "$type": "color"
+    },
+    "warn-dim": {
+      "$value": "{primitive.color.default.warn-dim}",
+      "$type": "color"
+    },
+    "danger": {
+      "$value": "{primitive.color.default.danger}",
+      "$type": "color"
+    },
+    "danger-soft": {
+      "$value": "{primitive.color.default.danger-soft}",
+      "$type": "color"
+    },
+    "danger-dim": {
+      "$value": "{primitive.color.default.danger-dim}",
+      "$type": "color"
+    },
+    "on-danger": {
+      "$value": "{primitive.color.neutral.onDanger}",
+      "$type": "color"
+    },
+    "scrim": {
+      "$value": "{primitive.color.neutral.scrim}",
+      "$type": "color"
+    },
+    "status-wait": {
+      "$value": "{primitive.color.neutral.text-faint-dark}",
+      "$type": "color"
+    },
+    "status-progress": {
+      "$value": "{primitive.color.default.accent}",
+      "$type": "color"
+    },
+    "status-urgent": {
+      "$value": "{primitive.color.default.warn}",
+      "$type": "color"
+    },
+    "status-completed": {
+      "$value": "{primitive.color.default.mint}",
+      "$type": "color"
+    },
+    "accent-bg": {
+      "$value": "{primitive.color.default.accent}",
+      "$type": "color"
+    },
+    "accent-soft-bg": {
+      "$value": "{primitive.color.default.accent-soft}",
+      "$type": "color"
+    },
+    "font-display": {
+      "$value": "{primitive.fontFamily.display}",
+      "$type": "fontFamily"
+    },
+    "font-body": {
+      "$value": "{primitive.fontFamily.body}",
+      "$type": "fontFamily"
+    },
+    "font-mono": {
+      "$value": "{primitive.fontFamily.mono}",
+      "$type": "fontFamily"
+    },
+    "radius-sm": {
+      "$value": "{primitive.radius.sm}",
+      "$type": "dimension"
+    },
+    "radius-md": {
+      "$value": "{primitive.radius.md}",
+      "$type": "dimension"
+    },
+    "radius-lg": {
+      "$value": "{primitive.radius.lg}",
+      "$type": "dimension"
+    },
+    "spacing-section": {
+      "$value": "{primitive.spacing.6}",
+      "$type": "dimension"
+    },
+    "spacing-component": {
+      "$value": "{primitive.spacing.4}",
+      "$type": "dimension"
+    },
+    "hero-glow": {
+      "$value": "none",
+      "$type": "color"
+    },
+    "card-top-highlight": {
+      "$value": "none",
+      "$type": "color"
+    }
+  },
+  "component": {
+    "button": {
+      "default-bg": {
+        "$value": "{semantic.surface-2}",
+        "$type": "color"
+      },
+      "default-fg": {
+        "$value": "{semantic.text}",
+        "$type": "color"
+      },
+      "default-border": {
+        "$value": "{semantic.border}",
+        "$type": "color"
+      },
+      "default-hover-bg": {
+        "$value": "{semantic.surface-hover}",
+        "$type": "color"
+      },
+      "primary-bg": {
+        "$value": "{semantic.accent}",
+        "$type": "color"
+      },
+      "primary-fg": {
+        "$value": "{semantic.on-accent}",
+        "$type": "color"
+      },
+      "primary-border": {
+        "$value": "{semantic.accent}",
+        "$type": "color"
+      },
+      "primary-hover": {
+        "$value": "{semantic.accent-soft}",
+        "$type": "color"
+      },
+      "danger-fg": {
+        "$value": "{semantic.danger}",
+        "$type": "color"
+      },
+      "danger-border": {
+        "$value": "{semantic.danger}",
+        "$type": "color"
+      },
+      "radius": {
+        "$value": "{primitive.radius.sm}",
+        "$type": "dimension"
+      },
+      "padding-x": {
+        "$value": "{primitive.spacing.4}",
+        "$type": "dimension"
+      },
+      "padding-y": {
+        "$value": "{primitive.spacing.2}",
+        "$type": "dimension"
+      },
+      "font-size": {
+        "$value": "{primitive.fontSize.sm}",
+        "$type": "dimension"
+      }
+    },
+    "card": {
+      "bg": {
+        "$value": "{semantic.surface}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{semantic.border}",
+        "$type": "color"
+      },
+      "radius": {
+        "$value": "{primitive.radius.lg}",
+        "$type": "dimension"
+      },
+      "shadow": {
+        "$value": "{primitive.shadow.panel}",
+        "$type": "shadow"
+      },
+      "padding": {
+        "$value": "{primitive.spacing.6}",
+        "$type": "dimension"
+      }
+    },
+    "input": {
+      "bg": {
+        "$value": "{semantic.surface}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{semantic.border}",
+        "$type": "color"
+      },
+      "focus-ring": {
+        "$value": "{semantic.accent}",
+        "$type": "color"
+      },
+      "radius": {
+        "$value": "{primitive.radius.md}",
+        "$type": "dimension"
+      }
+    },
+    "sidebar": {
+      "bg": {
+        "$value": "{semantic.sidebar}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{semantic.border}",
+        "$type": "color"
+      },
+      "active-bg": {
+        "$value": "{semantic.surface-2}",
+        "$type": "color"
+      },
+      "active-indicator": {
+        "$value": "{semantic.accent}",
+        "$type": "color"
+      }
+    },
+    "slider": {
+      "fill": {
+        "$value": "{semantic.accent}",
+        "$type": "color"
+      },
+      "track": {
+        "$value": "{semantic.surface-2}",
+        "$type": "color"
+      },
+      "thumb-border": {
+        "$value": "{semantic.surface}",
+        "$type": "color"
+      }
+    }
+  },
+  "dark": {
+    "semantic": {
+      "bg": {
+        "$value": "{primitive.color.neutral.bg-light}",
+        "$type": "color"
+      },
+      "sidebar": {
+        "$value": "{primitive.color.neutral.sidebar-light}",
+        "$type": "color"
+      },
+      "surface": {
+        "$value": "{primitive.color.neutral.surface-light}",
+        "$type": "color"
+      },
+      "surface-2": {
+        "$value": "{primitive.color.neutral.surface-2-light}",
+        "$type": "color"
+      },
+      "surface-hover": {
+        "$value": "{primitive.color.neutral.surface-hover-light}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{primitive.color.neutral.border-light}",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "{primitive.color.neutral.text-light}",
+        "$type": "color"
+      },
+      "text-muted": {
+        "$value": "{primitive.color.neutral.text-muted-light}",
+        "$type": "color"
+      },
+      "text-faint": {
+        "$value": "{primitive.color.neutral.text-faint-light}",
+        "$type": "color"
+      }
+    }
+  }
+}

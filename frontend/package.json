@@ -1,0 +1,38 @@
+{
+  "name": "colleris",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives",
+    "lint:fix": "eslint src --ext js,jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
+    "tokens:generate": "node ../.opencode/skills/design-system/scripts/generate-tokens.cjs --config ../assets/design-tokens.json -o ../assets/design-tokens.css",
+    "tokens:copy": "node -e \"const fs=require('fs'); fs.copyFileSync('../assets/design-tokens.css','src/tokens/tokens.css'); console.log('copied to src/tokens/tokens.css')\"",
+    "tokens:sync": "npm run tokens:generate && npm run tokens:copy",
+    "validate:tokens": "node ../.opencode/skills/design-system/scripts/validate-tokens.cjs --dir src",
+    "validate:all": "npm run validate:tokens && npm run lint"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "playwright": "^1.65.1",
+    "postcss": "^8.4.47",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^3.4.13",
+    "vite": "^8.0.0"
+  }
+}

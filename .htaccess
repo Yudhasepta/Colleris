@@ -1,0 +1,7 @@
+# Colleris — Laragon auto-virtual-host entry point.
+# Forwards every request to the Laravel backend's public directory so the
+# Vite dev server can proxy /api/* to http://colleris.test.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ backend/public/$1 [L]
+</IfModule>
