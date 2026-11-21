@@ -1319,3 +1319,47 @@ Rebuilt `/settings` on the "pulseboard-original" panel design (the one from the 
 | `AGENTS.md` / `docs/PROJECT.md` | two-instance setup, single-worker finding, file-backed broadcaster, corrected the (wrong) `PHP_CLI_SERVER_WORKERS` note |
 
 **Dev servers at session end**: MySQL (:3306) up; `artisan serve` :8000 (API) + :8001 (SSE) up; Apache (`colleris.test`) up (optional for dev); agent's Vite instance stopped — user runs `pnpm dev`.
+
+---
+
+## Session Log — 2026-11-21 (Session 5: per-theme logos, prompt SSE abort, git init for push)
+
+> **Status**: Complete. Lint 0 errors, build green (85 modules), `auth-race-check.mjs` 15/15, `sse-block-test.mjs` 3/3. Initial git commit e8b09f0 (246 files) ready to push.
+
+### A. Per-theme brand marks
+
+- 8 colourways in `C:\OpenCode\ImageSample` (ambersolargold/blueprint/cottoncandy/lilac/mint/nebulapurple/rose/tide .jpeg) → `frontend/public/logos/<presetId>.png` (128×128 transparent palette PNGs, ~9KB each; same sharp pipeline as the original logo).
+- `ThemeContext.jsx`: `PRESET_LOGOS` map + `presetLogo(preset)` (falls back to `/CollerisLogo.png`). `Sidebar` + `AuthModal` render `<img key={preset} src={presetLogo(preset)}>` — the mark follows the active preset (guests see amber; the account's server theme wins once `/me` freshens the seeded user).
+
+### B. SSE prompt client-abort (SseController)
+
+- The single-worker :8001 instance only noticed a dead client at the next ping tick (orphan streams could hold the worker up to a 15s ping cycle, delaying reconnects + queued requests). `sendEvent`/ping now check `flush()` write success and break the loop immediately on a dead socket; abort detection verified ~instant (destroy-at-10s probe ends the request at 10s, not 15s+).
+
+### C. Git prep (push pending on user side, option A)
+
+- `git init -b main` at project root; repo-local identity `Yudhasepta` / `Yudhasepta@users.noreply.github.com` (global config untouched).
+- New root `.gitignore`: `node_modules/`, `.opencode/`, `backend/storage/app/sse/`, `Thumbs.db` (existing `backend/` + `frontend/` ignores cover `.env`, `vendor/`, logs, dist).
+- Initial commit `e8b09f0` (246 files, ~38.5k insertions) — verified `.env`, `vendor/`, `node_modules/`, `.opencode/`, SSE queues, `laravel.log` are NOT staged.
+- `remote origin = https://github.com/Yudhasepta/Colleris.git`. Push is the user's one-time action (GCM browser sign-in as Yudhasepta; the machine's stored GitHub credential is Hexoricz's, so agent pushes will 403 until that credential is added).
+
+---
+
+## Session Log — 2026-11-21 (Session 6: archived-project restore fix, test-suite repair)
+
+> **Status**: Complete. `ArchiveRestoreTest` 4/4 green; live `archive-restore-check.mjs` 10/10 green (UI round-trip + API round-trip, scratch rows cleaned up). Full suite: 37/51 pass — the 13 remaining failures are pre-existing drift (suite had never run on this machine; see below), not regressions.
+
+### A. The bug (why "Restore" never worked)
+
+- `POST /projects/{id}/restore` and `POST /group-projects/{id}/restore` use implicit route-model binding on `SoftDeletes` models. The global scope excludes trashed rows, so binding **404'd before the controller ran** — the controllers' own `abort_unless($x->trashed(), 400, '…not archived.')` guard was unreachable for actually-archived records. Archive worked (active rows bind fine); listing worked (explicit `withTrashed()` in the index/archived-projects endpoints); only restore was broken.
+- **Fix**: `->withTrashed()` on the two restore routes (`backend/routes/api.php` lines 52/104). Controller guards already handle both directions (trashed → restored; active → 400 "not archived"); no controller/model changes.
+
+### B. Regression coverage
+
+- New `backend/tests/Feature/ArchiveRestoreTest.php` (4 tests): personal + group archive→restore round-trips and the negative case (restore on an active project → 400).
+- New `frontend/scripts/archive-restore-check.mjs` (live dev DB): personal project through the real UI (create → Archive button → Archived tab → Restore confirm → back in Active), group project through the API (archive → listed → **restore 200, previously 404** → back in group list). Scratch rows are force-deleted at the end.
+
+### C. Test-suite repair (first runnable state on this machine)
+
+- `pdo_sqlite` was disabled in `C:\laragon\bin\php\php-8.3.33-nts-Win32-vs16-x64\php.ini` (line 961 commented) → the whole `composer test` suite (in-memory SQLite per phpunit.xml) had **never been runnable** here since the suite landed 2026-11-11. Uncommented `extension=pdo_sqlite` (additive; affects the user's global PHP build — Apache fcgid + both artisan serve instances pick it up on restart).
+- `2026_11_15_000003_migrate_tags_to_junction_table` used MySQL-only raw SQL (`INSERT IGNORE` + `NOW()`); now driver-aware: `INSERT OR IGNORE` + `datetime('now')` on SQLite, unchanged MySQL text otherwise.
+- **Pre-existing failures (out of scope, documented)**: 13 of 51 tests fail on first-ever run — stale expectations (auth status codes, message strings, `diffInDays` rounding), test-helper gaps (GroupFlowTest doesn't attach the owner to `group_members`, same trap `isMember()` surfaced in this session's fix), and one real app bug already flagged in earlier logs: `ReminderController.php:43` "Undefined array key group_id" (500s in ReminderValidationTest ×3). Not touched — needs its own session.

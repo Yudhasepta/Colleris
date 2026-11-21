@@ -49,7 +49,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/projects/{project}', [ProjectController::class, 'update']);
     Route::patch('/projects/{project}/progress', [ProjectController::class, 'progress']);
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
-    Route::post('/projects/{project}/restore', [ProjectController::class, 'restore']);
+    // ->withTrashed(): implicit binding must resolve soft-deleted records for
+    // the restore action; the controller guards reject non-archived ones (400).
+    Route::post('/projects/{project}/restore', [ProjectController::class, 'restore'])->withTrashed();
     Route::patch('/projects/{project}/guide', [ProjectController::class, 'updateGuide']);
 
     // Project tasks (persistent, derived progress)
@@ -99,7 +101,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/groups/{group}/projects', [GroupController::class, 'assignProject']);
     Route::patch('/group-projects/{groupProject}', [GroupController::class, 'updateProject']);
     Route::post('/group-projects/{groupProject}/archive', [GroupController::class, 'archiveProject']);
-    Route::post('/group-projects/{groupProject}/restore', [GroupController::class, 'restoreProject']);
+    Route::post('/group-projects/{groupProject}/restore', [GroupController::class, 'restoreProject'])->withTrashed();
     Route::get('/groups/{group}/archived-projects', [GroupController::class, 'archivedProjects']);
 
     // Assignments (permission-aware project/note hand-off)

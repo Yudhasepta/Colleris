@@ -8,10 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Driver-specific dialect: MySQL `INSERT IGNORE` + `NOW()` vs SQLite
+        // `INSERT OR IGNORE` + `datetime('now')` (tests run on in-memory SQLite).
+        $isSqlite = \DB::getDriverName() === 'sqlite';
+        $ignore = $isSqlite ? 'OR IGNORE' : 'IGNORE';
+        $now = $isSqlite ? "datetime('now')" : 'NOW()';
+
         // Tags may already exist from seed data — insert only what's missing.
         \DB::statement("
-            INSERT IGNORE INTO tags (name, created_at, updated_at)
-            SELECT DISTINCT tag, NOW(), NOW()
+            INSERT {$ignore} INTO tags (name, created_at, updated_at)
+            SELECT DISTINCT tag, {$now}, {$now}
             FROM projects
             WHERE tag IS NOT NULL AND tag != ''
               AND tag NOT IN (SELECT name FROM tags)
@@ -19,7 +25,7 @@ return new class extends Migration
 
         // Migrate existing single-tag projects into the junction table (no timestamps on pivot).
         \DB::statement("
-            INSERT IGNORE INTO project_tags (project_id, tag_id)
+            INSERT {$ignore} INTO project_tags (project_id, tag_id)
             SELECT p.id, t.id
             FROM projects p
             JOIN tags t ON t.name = p.tag
