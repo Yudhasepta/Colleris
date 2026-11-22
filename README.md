@@ -12,6 +12,8 @@ Colleris is a structured, task-divided project-management web app, stylized to b
 
 Prerequisites: **PHP 8.3**, **Composer**, **Node.js** (20+), **pnpm**. No database server needed — a migrated and seeded SQLite database is bundled.
 
+**AI agents** (opencode, Claude Code, Codex): read [`AGENTS.md`](AGENTS.md) first — it has the exact start sequence, a self-verification checklist, and guardrails.
+
 ```powershell
 git clone https://github.com/Yudhasepta/Colleris.git
 cd colleris\backend
