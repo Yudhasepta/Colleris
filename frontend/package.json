@@ -11,10 +11,10 @@
     "lint:fix": "eslint src --ext js,jsx --fix",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
-    "tokens:generate": "node C:/OpenCode/CollerisNotes/opencode/skills/design-system/scripts/generate-tokens.cjs --config ../assets/design-tokens.json -o ../assets/design-tokens.css",
+    "tokens:generate": "node scripts/generate-tokens.cjs --config ../assets/design-tokens.json -o ../assets/design-tokens.css",
     "tokens:copy": "node -e \"const fs=require('fs'); fs.copyFileSync('../assets/design-tokens.css','src/tokens/tokens.css'); console.log('copied to src/tokens/tokens.css')\"",
     "tokens:sync": "npm run tokens:generate && npm run tokens:copy",
-    "validate:tokens": "node C:/OpenCode/CollerisNotes/opencode/skills/design-system/scripts/validate-tokens.cjs --dir src",
+    "validate:tokens": "node scripts/validate-tokens.cjs --dir src",
     "validate:all": "npm run validate:tokens && npm run lint"
   },
   "dependencies": {

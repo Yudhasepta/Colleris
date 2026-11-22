@@ -1,1 +1,4 @@
 *.sqlite*
+# Bundled dev database (migrated + seeded) — tracked on purpose so the
+# repo runs without an external DB server.
+!database.sqlite

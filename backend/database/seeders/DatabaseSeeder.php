@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\UserNotification;
 use App\Models\UserPermission;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -310,11 +311,14 @@ class DatabaseSeeder extends Seeder
 
     private function notification(int $userId, string $type, int $actorId, array $payload): void
     {
-        $exists = UserNotification::where('user_id', $userId)
+        $query = UserNotification::where('user_id', $userId)
             ->where('type', $type)
-            ->where('actor_id', $actorId)
-            ->whereJsonContains('payload', $payload)
-            ->exists();
+            ->where('actor_id', $actorId);
+
+        // SQLite's whereJsonContains compiles to invalid SQL; compare in PHP there instead.
+        $exists = DB::connection()->getDriverName() === 'sqlite'
+            ? $query->get()->contains(fn (UserNotification $n): bool => $n->payload === $payload)
+            : $query->whereJsonContains('payload', $payload)->exists();
 
         if (! $exists) {
             UserNotification::create([
