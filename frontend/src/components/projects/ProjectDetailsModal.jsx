@@ -19,11 +19,14 @@ export default function ProjectDetailsModal({
   onReopen,
   onEdit,
   onDelete,
+  onExportPdf,
   onUpdateGuide,
   hasGuidePermission,
 }) {
   const [completeError, setCompleteError] = useState(null)
   const [completing, setCompleting] = useState(false)
+  const [exporting, setExporting] = useState(false)
+  const [exportError, setExportError] = useState(null)
   const [guideOpen, setGuideOpen] = useState(false)
 
   if (!project) return null
@@ -61,15 +64,24 @@ export default function ProjectDetailsModal({
     }
   }
 
+  async function handleExport() {
+    setExportError(null)
+    setExporting(true)
+    try {
+      await onExportPdf(project)
+    } catch (e) {
+      setExportError(e.message || 'Export failed.')
+    } finally {
+      setExporting(false)
+    }
+  }
+
   return (
     <>
       <Modal open={open} onClose={onClose} maxWidth={520}>
         <div className="p-5">
           <div className="flex items-start justify-between gap-3">
             <StatusBadge status={project.status} />
-            {isCompleted && (
-              <span className="rounded-md bg-mint text-white">Completed</span>
-            )}
           </div>
           <div className="font-display text-[18px] font-bold mt-3 leading-tight tracking-tight">{project.title}</div>
           <div className="text-[12px] text-textMuted font-mono mt-1 flex items-center gap-2 flex-wrap">
@@ -170,10 +182,18 @@ export default function ProjectDetailsModal({
             <Button className="flex-1 justify-center" onClick={() => onEdit(project)}>
               Edit details
             </Button>
+            <Button
+              className="flex-1 justify-center"
+              onClick={handleExport}
+              disabled={exporting || !onExportPdf}
+            >
+              {exporting ? 'Preparing…' : 'Export PDF'}
+            </Button>
             <Button variant="danger" className="flex-1 justify-center" onClick={() => onDelete(project)}>
               Archive
             </Button>
           </div>
+          {exportError && <div className="text-[11px] text-danger mt-2">{exportError}</div>}
           <div className="text-[10.5px] text-textMuted text-center mt-1">Archived projects can be restored later.</div>
         </div>
       </Modal>

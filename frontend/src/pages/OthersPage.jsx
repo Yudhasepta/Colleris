@@ -46,6 +46,7 @@ export default function OthersPage() {
     voteGroupComplete,
     finalizeGroupVote,
     cancelGroupVote,
+    exportGroupProjectPdf,
     refresh: refreshConnections,
   } = useConnections(user?.id)
 
@@ -304,6 +305,7 @@ export default function OthersPage() {
         onVote={voteGroupComplete}
         onFinalizeVote={finalizeGroupVote}
         onCancelVote={cancelGroupVote}
+        onExportPdf={(gp) => openGroup && exportGroupProjectPdf(gp, openGroup)}
       />
       <CreateGroupModal open={createOpen} onClose={() => setCreateOpen(false)} onCreate={createGroup} currentUserId={user?.id} />
       <JoinGroupModal open={joinOpen} onClose={() => setJoinOpen(false)} onJoin={joinGroup} />

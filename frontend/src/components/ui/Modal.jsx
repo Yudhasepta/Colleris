@@ -55,7 +55,7 @@ export default function Modal({
             onClose()
           }}
           aria-label="Close"
-          className="absolute top-3 right-3 w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center text-textMuted hover:bg-surface2 hover:text-text transition-colors duration-[var(--primitive-duration-fast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--focus-ring)]"
+          className="absolute top-3 right-3 w-8 h-8 rounded-lg border border-danger text-danger flex items-center justify-center hover:bg-danger hover:text-onDanger transition-colors duration-[var(--primitive-duration-fast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--focus-ring)]"
         >
           ✕
         </button>

@@ -113,3 +113,69 @@ export async function api(path, { method = 'GET', body, token } = {}) {
   devLog({ method, path, status: res.status, elapsedMs })
   return data
 }
+
+// Authenticated binary download: fetches a PDF endpoint with the active device
+// session token and saves it via an object URL. Prefers the server's
+// Content-Disposition filename; falls back to the provided name. Throws an
+// error shaped like `api()` failures on non-2xx responses.
+export async function downloadPdf(path, fallbackFilename) {
+  const token = activeToken()
+  const headers = { Accept: 'application/pdf' }
+  if (token) headers.Authorization = `Bearer ${token}`
+
+  const start = performance.now()
+  let res
+  try {
+    res = await fetch(`/api${path}`, { headers })
+  } catch {
+    devLog({ method: 'GET', path, network: true, elapsedMs: Math.round(performance.now() - start) })
+    const err = new Error('Network error — the Colleris API is unreachable.')
+    err.status = 0
+    err.network = true
+    throw err
+  }
+
+  if (!res.ok) {
+    let message = `Request failed (${res.status})`
+    const contentType = res.headers.get('Content-Type') || ''
+    if (contentType.includes('application/json')) {
+      try {
+        const data = await res.json()
+        message = data.message || message
+      } catch {
+        /* keep fallback message */
+      }
+    }
+    devLog({ method: 'GET', path, status: res.status, elapsedMs: Math.round(performance.now() - start), error: message })
+    const err = new Error(message)
+    err.status = res.status
+    err.network = false
+    throw err
+  }
+
+  const blob = await res.blob()
+  const disposition = res.headers.get('Content-Disposition') || ''
+  const match = /filename="?([^";\n]+)"?/.exec(disposition)
+  const filename = match?.[1] || fallbackFilename
+
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  document.body.appendChild(anchor)
+  anchor.click()
+  anchor.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 10_000)
+
+  devLog({ method: 'GET', path, status: res.status, elapsedMs: Math.round(performance.now() - start) })
+}
+
+// Small filename helper shared by the export hooks — mirrors the server's
+// Str::slug for the Content-Disposition fallback path.
+export function pdfSlug(text, fallback = 'export') {
+  const slug = String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  return slug || fallback
+}

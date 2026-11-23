@@ -33,6 +33,7 @@ export default function MainPage() {
     completeProject,
     reopenProject,
     updateGuide,
+    exportProjectPdf,
     refresh,
     refreshArchived,
   } = useProjects(user?.id)
@@ -234,6 +235,7 @@ export default function MainPage() {
             onReopen={reopenProject}
             onEdit={openEdit}
             onDelete={handleDelete}
+            onExportPdf={exportProjectPdf}
             onUpdateGuide={updateGuide}
             hasGuidePermission={user?.permissions?.guide_upload !== 'decline'}
           />

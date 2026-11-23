@@ -30,6 +30,7 @@ export default function GroupDetailModal({
   onRequestComplete,
   onVote,
   onCancelVote,
+  onExportPdf,
 }) {
   const { user } = useAuth()
   const [copied, setCopied] = useState(false)
@@ -43,6 +44,7 @@ export default function GroupDetailModal({
   const [editTitle, setEditTitle] = useState('')
   const [editAssignee, setEditAssignee] = useState(null)
   const [savingProject, setSavingProject] = useState(false)
+  const [exportingId, setExportingId] = useState(null)
 
   const memberCount = group?.members?.length ?? 0
   const groupTypeLabel = group?.groupTypeLabel || (group?.hasSupervisor ? 'Supervised Projects' : 'Collaborating Team Projects')
@@ -83,6 +85,19 @@ export default function GroupDetailModal({
       setActionError('')
     } catch (err) {
       setActionError(failure(err).message)
+    }
+  }
+
+  async function handleExportProject(p) {
+    if (!onExportPdf) return
+    setExportingId(p.id)
+    setActionError('')
+    try {
+      await onExportPdf(p)
+    } catch (err) {
+      setActionError(failure(err).message)
+    } finally {
+      setExportingId(null)
     }
   }
 
@@ -173,6 +188,17 @@ export default function GroupDetailModal({
             )}
           </div>
           <div className="flex items-center gap-1.5 flex-shrink-0">
+            {!showEditForm && onExportPdf && (
+              <Button
+                size="sm"
+                variant="ghost"
+                className="!px-2 !py-0.5 !text-[10.5px]"
+                onClick={() => handleExportProject(p)}
+                disabled={exportingId === p.id}
+              >
+                {exportingId === p.id ? 'Preparing…' : 'Export PDF'}
+              </Button>
+            )}
             {!locked && !showEditForm && canEditProject && (
               <Button size="sm" variant="ghost" className="!px-2 !py-0.5 !text-[10.5px]" onClick={() => startEditProject(p)}>
                 Edit
@@ -305,6 +331,17 @@ export default function GroupDetailModal({
         <span className="text-[10px] font-mono text-textMuted flex-shrink-0">Archived {new Date(p.deleted_at).toLocaleDateString()}</span>
       </div>
       <div className="flex items-center justify-end gap-2 mt-2">
+        {onExportPdf && (
+          <Button
+            size="sm"
+            variant="ghost"
+            className="!px-2 !py-0.5 !text-[10.5px]"
+            onClick={() => handleExportProject(p)}
+            disabled={exportingId === p.id}
+          >
+            {exportingId === p.id ? 'Preparing…' : 'Export PDF'}
+          </Button>
+        )}
         <button onClick={() => handleRestore(p.id)} className="text-[11px] font-mono text-accent hover:text-text transition-colors">
           Restore
         </button>

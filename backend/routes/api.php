@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ConnectionsController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\PdfExportController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ProjectTaskController;
 use App\Http\Controllers\Api\ReminderController;
@@ -53,6 +54,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // the restore action; the controller guards reject non-archived ones (400).
     Route::post('/projects/{project}/restore', [ProjectController::class, 'restore'])->withTrashed();
     Route::patch('/projects/{project}/guide', [ProjectController::class, 'updateGuide']);
+    // PDF export — server-rendered project report (owner only). ->withTrashed():
+    // archived (soft-deleted) projects stay exportable as final reports.
+    Route::get('/projects/{project}/pdf', [PdfExportController::class, 'projectPdf'])->withTrashed();
 
     // Project tasks (persistent, derived progress)
     Route::get('/projects/{project}/tasks', [ProjectTaskController::class, 'index']);
@@ -77,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/group-projects/{groupProject}/votes', [ProjectTaskController::class, 'groupVotes']);
     Route::post('/group-projects/{groupProject}/finalize-vote', [ProjectTaskController::class, 'groupFinalizeVote']);
     Route::post('/group-projects/{groupProject}/cancel-vote', [ProjectTaskController::class, 'groupCancelVote']);
+    // PDF export — server-rendered group project report with group context (members only).
+    // ->withTrashed(): archived group projects stay exportable as final reports.
+    Route::get('/group-projects/{groupProject}/pdf', [PdfExportController::class, 'groupProjectPdf'])->withTrashed();
 
     // Directory + connections
     Route::get('/connections', [ConnectionsController::class, 'index']);

@@ -340,6 +340,8 @@ Progress rules:
 
 Projects without tasks are legacy data. A seeded completed project can show 100% with no tasks. Task-backed projects are recalculated on list, show, and task mutations.
 
+PDF export: `GET /projects/{id}/pdf` renders a server-side project-details report (status, task-derived progress, due, tags, guide note, task list) for the owner only; the frontend `ProjectDetailsModal` surfaces an "Export PDF" button that downloads the attachment. The route uses `->withTrashed()`, so archived (soft-deleted) projects can still be exported.
+
 ### 6.5 Personal tasks
 
 Tasks are rows in `project_tasks` with `project_id` or `group_project_id`, a title, a completed flag, and a numeric position. Personal tasks support add, edit, delete, toggle complete, reorder, and fetch.
@@ -404,6 +406,8 @@ Completion rules:
 - **Vote start:** requires membership, a collaborating group, no existing pending vote, a non-completed project, and at least one task. The initiator's vote is automatically approved. Every member gets a row in `group_project_completion_votes`; other members get a `completion_vote_requested` notification.
 - **Vote cast:** each member can approve or reject with an optional reason. Rejection sets `vote_status` back to `none`, leaves the rejected vote rows in place, and notifies all members. Approval triggers a unanimity check. If every member has approved and every task is complete, the project is completed, votes are deleted, and all members get `completion_vote_approved`. If tasks remain, the server returns 422 and leaves the vote pending.
 - **Vote finalisation gap:** if everyone approves before all tasks are done, the UI hides the Approve button because each member has already approved. No automatic finalisation runs when the last task is completed. Someone must reject or cancel and restart the vote. This is listed under known gaps.
+
+PDF export: `GET /group-projects/{id}/pdf` renders a server-side report for a group project — group context (type label, active join code, supervisor, members with roles), project status, assignee, derived progress, tags, task list, and a pending-completion-vote panel when `vote_status = pending` — restricted to current group members. The frontend `GroupDetailModal` offers a per-project "Export PDF" button. The route uses `->withTrashed()`, so archived group projects can still be exported.
 
 `vote_status` is `none` or `pending`. Individual votes are `pending`, `approved`, or `rejected`.
 
@@ -760,6 +764,7 @@ All routes in this section require Sanctum.
 | PATCH | `/tasks/{task}/complete` | None | Toggles completion; any group member may toggle |
 | POST | `/projects/{project}/complete` | None | All tasks must be complete |
 | POST | `/projects/{project}/reopen` | None | Retains task completion |
+| GET | `/projects/{project}/pdf` | None | Owner only; server-rendered PDF report (status, derived progress, due, tags, guide note, task table) downloaded as `application/pdf` attachment; 403 for non-owners. Route is `withTrashed()` — archived projects exportable |
 
 ### Group projects, tasks, and votes
 
@@ -774,6 +779,7 @@ All routes in this section require Sanctum.
 | POST | `/group-projects/{groupProject}/vote` | `approve` boolean, `reason?` | Collaborating only; pending vote required |
 | GET | `/group-projects/{groupProject}/votes` | None | Member-only vote detail |
 | POST | `/group-projects/{groupProject}/cancel-vote` | None | Initiator or group owner |
+| GET | `/group-projects/{groupProject}/pdf` | None | Member only; server-rendered PDF report with group context (type label, active join code, supervisor, members with roles) plus project status/assignee/progress/tags/tasks and a pending-vote panel when `vote_status = pending`. Route is `withTrashed()` — archived group projects exportable |
 | PATCH | `/group-projects/{groupProject}` | `title?`, `assigner_user_id?` | Member in collaborating groups; owner, supervisor, or current assignee in supervised groups; completed projects rejected |
 
 ### Connections
@@ -1246,6 +1252,19 @@ Dates are reconstructed from file timestamps. No Git log is available. The order
 - **Archived-project restore fix**: `POST /projects/{id}/restore` and `POST /group-projects/{id}/restore` 404'd for actually-archived (soft-deleted) records — implicit route-model binding applies the SoftDeletes global scope, so trashed models never resolved and the request died before the controller ran. Added `->withTrashed()` to the two restore routes; the existing controller guards (`trashed? restore : 400`) now do all the work. Regression: new `tests/Feature/ArchiveRestoreTest.php` (4 tests, green) + live `frontend/scripts/archive-restore-check.mjs` (UI round-trip + API round-trip, scratch rows cleaned up).
 - **Test-suite repair** (first runnable state on this machine): enabled `pdo_sqlite` in the Laragon php.ini (the in-memory SQLite suite could never run without it) and made `2026_11_15_000003` driver-aware (`INSERT OR IGNORE`/`datetime('now')` on SQLite; MySQL text unchanged). Full suite: 37/51 pass — the 13 failures are pre-existing drift (stale expectations, test-helper gaps, and the long-known `ReminderController:43` "Undefined array key group_id"), documented in DEV_NOTES session 6, out of scope.
 - **Git**: repository initialised (`main`, identity `Yudhasepta` / noreply), root `.gitignore` (node_modules, .opencode, `backend/storage/app/sse/`, Thumbs.db), initial commit `e8b09f0` (246 files; `.env`/vendor/node_modules/SSE queues verified excluded), `remote origin → https://github.com/Yudhasepta/Colleris.git`. The user's one-time `git push -u origin main` (GCM browser sign-in as Yudhasepta) is the only remaining manual step.
+
+### 2026-11-23: PDF export for project details (personal + group)
+
+- New `backend/app/Http/Controllers/Api/PdfExportController.php` with two server-rendered PDF endpoints, powered by `dompdf/dompdf` (added to `composer.json`; raw library — no Laravel-constrained wrapper, no external binary):
+  - `GET /api/projects/{project}/pdf` — owner-only project report: status (UI label), task-derived progress, due, tags, guide note, full task table, owner name/handle, generated timestamp. Recalculates task-backed progress before rendering, matching the read-path behaviour.
+  - `GET /api/group-projects/{groupProject}/pdf` — current-member-only (checked via the existing `GroupAccess` service) report with group context: group name, type label, active join code, supervisor, members with roles; project title/status/assignee/derived progress/tags; task table; and a pending-completion-vote panel (approved counts) when `vote_status = pending`.
+  - Both return `application/pdf` with a `Content-Disposition: attachment` filename (`colleris-project-<slug>-<Ymd>.pdf` / `colleris-<group-slug>-<project-slug>.pdf`).
+- Two Blade templates under `backend/resources/views/exports/` (`project`, `group-project`, shared `_styles` partial) — Dompdf-safe CSS only (tables/block, no flexbox; brand palette hardcoded since Dompdf has no CSS-variable support).
+- Frontend: `frontend/src/api/client.js` gains `downloadPdf(path, fallbackFilename)` (Bearer-token fetch → blob → object-URL download; server `Content-Disposition` filename wins) and `pdfSlug()`; `useProjects` gains `exportProjectPdf(project)`; `useConnections` gains `exportGroupProjectPdf(groupProject, group)`.
+- UI: `ProjectDetailsModal` footer gains an "Export PDF" button (three-up row with Edit/Archive, loading + error states); `GroupDetailModal` active project cards gain a per-project "Export PDF" ghost button (visible even for completed/locked projects, so final reports can be exported); archived group-project cards gain the same button next to Restore.
+- Tests: new `tests/Feature/PdfExportTest.php` (7 tests: owner download 200 + `%PDF` magic + headers, non-owner 403, guest 401, group-member download 200, non-member 403, owner archived download 200, member archived download 200) — all green on in-memory SQLite.
+- Archived (soft-deleted) projects are supported: both PDF routes use `->withTrashed()` (same pattern as the restore routes), so final reports of archived records can still be exported; the controller's ownership/`GroupAccess` guards apply unchanged.
+- Frontend polish: the duplicate hardcoded "Completed" span in `ProjectDetailsModal`'s header was removed (the `StatusBadge` already shows it — the span had also collided with the modal close button); the shared `Modal` close button is now a round-square red outline (`rounded-lg border-danger text-danger`) that fills with `bg-danger` + `on-danger` ✕ on hover.
 
 ## 13. Validation history
 

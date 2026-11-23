@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { api } from '../api/client.js'
+import { api, downloadPdf, pdfSlug } from '../api/client.js'
 
 // Projects live in the Laravel database. Mutations optimistically update local
 // state and reconcile with the server response.
@@ -172,6 +172,11 @@ export function useProjects(userId) {
     setArchived((prev) => prev.filter((p) => p.id !== id))
   }
 
+  async function exportProjectPdf(project) {
+    const fallback = `colleris-project-${pdfSlug(project?.title, project?.id)}-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}.pdf`
+    await downloadPdf(`/projects/${project.id}/pdf`, fallback)
+  }
+
   return {
     projects,
     loading,
@@ -189,6 +194,7 @@ export function useProjects(userId) {
     completeProject,
     reopenProject,
     restoreProject,
+    exportProjectPdf,
     refresh: fetcher,
     refreshArchived: fetchArchived,
   }

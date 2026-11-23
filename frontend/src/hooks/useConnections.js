@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { api } from '../api/client.js'
+import { api, downloadPdf, pdfSlug } from '../api/client.js'
 import { onGroupsChanged } from '../utils/events.js'
 
 // Connections, public directory search (guest-safe), groups, invitations and
@@ -233,6 +233,13 @@ export function useConnections(userId) {
     return refreshAfter(() => api(`/group-projects/${groupProjectId}/cancel-vote`, { method: 'POST' }))
   }
 
+  // PDF export — server-rendered report; the caller passes the owning group
+  // for the fallback filename (the server's Content-Disposition wins).
+  async function exportGroupProjectPdf(groupProject, group) {
+    const fallback = `colleris-${pdfSlug(group?.name, group?.id)}-${pdfSlug(groupProject?.title, groupProject?.id)}.pdf`
+    await downloadPdf(`/group-projects/${groupProject.id}/pdf`, fallback)
+  }
+
   return {
     connectionIds,
     groups,
@@ -263,6 +270,7 @@ export function useConnections(userId) {
     voteGroupComplete,
     finalizeGroupVote,
     cancelGroupVote,
+    exportGroupProjectPdf,
     refresh: load,
   }
 }
